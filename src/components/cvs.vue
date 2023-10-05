@@ -6,15 +6,17 @@
 console.clear()
 import cvs from './canvas_main.ts'
 import $ from 'jquery'
+import drag_class from './drag.ts'
 
 $(() => {
   const rt_cvs = new cvs($('#container')[0])
+  const drag = new drag_class($('html')[0])
   const offset = -5
   var keyed: boolean = false
   var stoped: boolean = false
   var keywasd: any = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false }
 
-  const d = () => {
+  const d = async (e: JQuery.Event) => { // 移动检测Emm.eee.aaa....
     if (stoped) return
 
     if (keywasd.ArrowUp) {
@@ -30,31 +32,18 @@ $(() => {
       rt_cvs.moveCamera(offset, 0)
     }
 
-    requestAnimationFrame(() => { d() })
+    requestAnimationFrame(() => { d(e) })
   }
 
   /* 监听并设置 */
   // 键盘
-  $('html').on('keydown', () => {
+  $('html').on('keydown', (e) => {
     if (keyed) return
     stoped = false
     keyed = true
-    d()
+    d(e)
   })
   $('html').on('keyup', () => {
-    if (keywasd.ArrowDown == false && keywasd.ArrowUp == false && keywasd.ArrowLeft == false && keywasd.ArrowRight == false) {
-      keyed = false
-      stoped = true
-    }
-  })
-  // 触摸
-  $('html').on('pointerdown', () => {
-    if (keyed) return
-    stoped = false
-    keyed = true
-    d()
-  })
-  $('html').on('pointerup', () => {
     if (keywasd.ArrowDown == false && keywasd.ArrowUp == false && keywasd.ArrowLeft == false && keywasd.ArrowRight == false) {
       keyed = false
       stoped = true
@@ -71,16 +60,7 @@ $(() => {
     if (e.originalEvent == null) return
     keywasd[e.originalEvent.code] = false
   })
-  // 触摸
-  $('html').on('pointerdown', (e) => {
-    if (e.originalEvent == null) return
-    //
-  })
-  $('html').on('pointerup', (e) => {
-    if (e.originalEvent == null) return
-    //
-  })
 
-  console.log(rt_cvs)
+  console.log(drag)
 })
 </script>
