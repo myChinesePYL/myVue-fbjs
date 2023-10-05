@@ -33,6 +33,8 @@ $(() => {
     requestAnimationFrame(() => { d() })
   }
 
+  /* 监听并设置 */
+  // 键盘
   $('html').on('keydown', () => {
     if (keyed) return
     stoped = false
@@ -45,8 +47,22 @@ $(() => {
       stoped = true
     }
   })
+  // 触摸
+  $('html').on('pointerdown', () => {
+    if (keyed) return
+    stoped = false
+    keyed = true
+    d()
+  })
+  $('html').on('pointerup', () => {
+    if (keywasd.ArrowDown == false && keywasd.ArrowUp == false && keywasd.ArrowLeft == false && keywasd.ArrowRight == false) {
+      keyed = false
+      stoped = true
+    }
+  })
 
-  // 键盘是否WASD
+  /* 键盘/触摸是否WASD */
+  // 键盘
   $('html').on('keydown', (e) => {
     if (e.originalEvent == null) return
     keywasd[e.originalEvent.code] = true
@@ -54,6 +70,15 @@ $(() => {
   $('html').on('keyup', (e) => {
     if (e.originalEvent == null) return
     keywasd[e.originalEvent.code] = false
+  })
+  // 触摸
+  $('html').on('pointerdown', (e) => {
+    if (e.originalEvent == null) return
+    //
+  })
+  $('html').on('pointerup', (e) => {
+    if (e.originalEvent == null) return
+    //
   })
 
   console.log(rt_cvs)
