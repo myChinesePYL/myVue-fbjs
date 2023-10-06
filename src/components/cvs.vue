@@ -10,13 +10,12 @@ import drag_class from './drag.ts'
 
 $(() => {
   const rt_cvs = new cvs($('#container')[0])
-  const drag = new drag_class($('html')[0])
   const offset = -5
   var keyed: boolean = false
   var stoped: boolean = false
   var keywasd: any = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false }
 
-  const d = async (e: JQuery.Event) => { // 移动检测Emm.eee.aaa....
+  const d = async () => { // 移动检测Emm.eee.aaa....
     if (stoped) return
 
     if (keywasd.ArrowUp) {
@@ -32,16 +31,16 @@ $(() => {
       rt_cvs.moveCamera(offset, 0)
     }
 
-    requestAnimationFrame(() => { d(e) })
+    requestAnimationFrame(() => { d() })
   }
 
   /* 监听并设置 */
   // 键盘
-  $('html').on('keydown', (e) => {
+  $('html').on('keydown', () => {
     if (keyed) return
     stoped = false
     keyed = true
-    d(e)
+    d()
   })
   $('html').on('keyup', () => {
     if (keywasd.ArrowDown == false && keywasd.ArrowUp == false && keywasd.ArrowLeft == false && keywasd.ArrowRight == false) {
@@ -60,7 +59,9 @@ $(() => {
     if (e.originalEvent == null) return
     keywasd[e.originalEvent.code] = false
   })
-
-  console.log(drag)
+  // 触摸
+  new drag_class($('html')[0], (e: any) => {
+    rt_cvs.moveCamera(e.x, e.y)
+  })
 })
 </script>
