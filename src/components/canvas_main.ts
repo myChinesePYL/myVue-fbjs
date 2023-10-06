@@ -30,51 +30,47 @@ export default class main {
       img.top = window.innerHeight - 200 * 5 + 300
       img.name = 'mountains'
       img.scale(3)
+      // 山(前面那个)
+      fabric.Image.fromURL('/image/2.png', (img: fabric.Image) => {
+        img.left = -100
+        img.top = window.innerHeight - 200 * 5 + 100 + 300
+        img.name = 'mountain'
+        img.scale(2)
+        img.scaleX = 3
+        // 模糊的草
+        fabric.Image.fromURL('/image/blur_grass.png', (img: fabric.Image) => {
+          img.left = -100 * 2.5
+          img.top = window.innerHeight - 200 * 1.25
+          img.name = 'blur_grass'
+          img.scaleY = 5
+          img.scaleX = 5
+          this.cvs.add(img)
+          // 稍微有点模糊的草
+          fabric.Image.fromURL('/image/blur_grass_center.png', (img: fabric.Image) => {
+            img.left = -100 * 2.5
+            img.top = window.innerHeight - 140 * 1.25
+            img.name = 'blur_grass_center'
+            img.scaleY = 5
+            img.scaleX = 7
+            // 近的草
+            fabric.Image.fromURL('/image/grass.png', (img: fabric.Image) => {
+              img.left = -100 * 2.5
+              img.top = window.innerHeight - 80 * 1.25
+              img.name = 'grass'
+              img.scaleY = 5
+              img.scaleX = 9
 
-      this.cvs.add(img)
-      this.cvs.renderAll()
-    })
-    // 山(前面那个)
-    fabric.Image.fromURL('/image/2.png', (img: fabric.Image) => {
-      img.left = -100
-      img.top = window.innerHeight - 200 * 5 + 100 + 300
-      img.name = 'mountain'
-      img.scale(2)
-      img.scaleX = 3
-
-      this.cvs.add(img)
-      this.cvs.renderAll()
-    })
-    // 模糊的草
-    fabric.Image.fromURL('/image/blur_grass.png', (img: fabric.Image) => {
-      img.left = -100 * 2.5
-      img.top = window.innerHeight - 200 * 1.25
-      img.name = 'blur_grass'
-      img.scaleY = 5
-      img.scaleX = 5
-      this.cvs.add(img)
-
-      this.cvs.renderAll()
-    }, { crossOrigin: 'anonymous' })
-    // 稍微有点模糊的草
-    fabric.Image.fromURL('/image/blur_grass_center.png', (img: fabric.Image) => {
-      img.left = -100 * 2.5
-      img.top = window.innerHeight - 140 * 1.25
-      img.name = 'blur_grass_center'
-      img.scaleY = 5
-      img.scaleX = 7
-
-      this.cvs.add(img)
-      this.cvs.renderAll()
-    }, { crossOrigin: 'anonymous' })
-    // 近的草
-    fabric.Image.fromURL('/image/grass.png', (img: fabric.Image) => {
-      img.left = -100 * 2.5
-      img.top = window.innerHeight - 80 * 1.25
-      img.name = 'grass'
-      img.scaleY = 5
-      img.scaleX = 9
-
+              this.cvs.add(img)
+              this.cvs.renderAll()
+            }, { crossOrigin: 'anonymous' })
+            this.cvs.add(img)
+            this.cvs.renderAll()
+          }, { crossOrigin: 'anonymous' })
+          this.cvs.renderAll()
+        }, { crossOrigin: 'anonymous' })
+        this.cvs.add(img)
+        this.cvs.renderAll()
+      }, { crossOrigin: 'anonymous' })
       this.cvs.add(img)
       this.cvs.renderAll()
     }, { crossOrigin: 'anonymous' })
