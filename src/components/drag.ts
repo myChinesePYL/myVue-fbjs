@@ -16,6 +16,11 @@ export default class main {
         this.back.y = e.clientY
         return
       }
+      if (this.args.x === 0 && this.args.y === 0) {
+        this.back.x = e.clientX
+        this.back.y = e.clientY
+        return
+      }
       if (this.back.x == undefined) this.back.x = e.clientX
       if (this.back.y == undefined) this.back.y = e.clientY
 
