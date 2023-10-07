@@ -19,8 +19,8 @@ export default class main {
         this.back.y = e.screenY
         return
       }
-      if (this.back.x == undefined || !(e.screenX - this.back.x >= -30 && e.screenX - this.back.x <= 30)) this.back.x = e.screenX
-      if (this.back.y == undefined || !(e.screenY - this.back.y >= -30 && e.screenY - this.back.y <= 30)) this.back.y = e.screenY
+      if (this.back.x == undefined) this.back.x = e.screenX
+      if (this.back.y == undefined) this.back.y = e.screenY
 
       this.args.x = e.screenX - this.back.x
       this.args.y = e.screenY - this.back.y
@@ -28,6 +28,10 @@ export default class main {
       this.back.x = e.screenX
       this.back.y = e.screenY
       this.callback(this.args)
+    })
+    $(this.target).on('pointerup', (e: JQuery.Event) => {
+    	this.back.x = undefined
+	this.back.y = undefined
     })
 
     return this
